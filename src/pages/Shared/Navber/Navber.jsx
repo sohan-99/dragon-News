@@ -1,8 +1,22 @@
+/* eslint-disable no-unused-vars */
 // import React from 'react';
+import { useContext } from 'react';
 import user from '../../../assets/user.png'
 import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from '../../../provider/AuthProvider';
+import { Result } from 'postcss';
 
 const Navber = () => {
+    const { user, logOut } = useContext(AuthContext)
+    const handleSignOut = () => {
+        logOut()
+            .then(result => {
+                console.log(result.user);
+            })
+            .catch(error => {
+                console.log(error.message);
+            })
+    }
     const links = <>
         <li><NavLink to='/'>Home</NavLink></li>
         <li><NavLink to='/about'>About</NavLink></li>
@@ -34,9 +48,14 @@ const Navber = () => {
                         <img src={user} />
                     </div>
                 </label>
-                <Link>
-                <button className="btn">Login</button>
-                </Link>
+                {
+                    user ?
+                        <button onClick={handleSignOut} className="btn">SignOut</button>
+                        :
+                        <Link>
+                            <button className="btn">Login</button>
+                        </Link>
+                }
 
             </div>
         </div>

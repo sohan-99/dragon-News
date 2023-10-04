@@ -3,18 +3,27 @@
 
 import { Link } from "react-router-dom";
 import Navber from "../Shared/Navber/Navber";
+import { useContext } from "react";
+import { AuthContext } from "../../provider/AuthProvider";
 
 const Login = () => {
+    const { signIn } = useContext(AuthContext)
     const handleLogin = e => {
         e.preventDefault();
-        // const email =e.target.email.value;
-        // const password= e.target.password.value;
-        // console.log(email,password);
-        console.log(e.currentTarget);
         const form = new FormData(e.currentTarget);
-        console.log(form);
-        console.log(form.get('password'));
+        const email = form.get('email');
+        const password = form.get('password');
+        
+        // Pass email and password to signIn function
+        signIn(email, password)
+            .then(result => {
+                console.log(result.user);
+            })
+            .catch(error => {
+                console.log(error.message);
+            })
     }
+    
     return (
         <div>
             <Navber></Navber>
@@ -40,7 +49,7 @@ const Login = () => {
                     <button className="btn btn-primary">Login</button>
                 </div>
             </form>
-            <p className="text-center mt-4 ">Don't have an account <Link  className='text-blue-600 font-bold' to='/register'>Register</Link></p>
+            <p className="text-center mt-4 ">Don't have an account <Link className='text-blue-600 font-bold' to='/register'>Register</Link></p>
 
 
 

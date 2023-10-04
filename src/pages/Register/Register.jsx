@@ -5,18 +5,30 @@
 import { Link } from "react-router-dom";
 import Navber from "../Shared/Navber/Navber";
 import Login from './../Login/Login';
+import { useContext } from "react";
+import { AuthContext } from "../../provider/AuthProvider";
 
 const Register = () => {
+   
+    const { createUser}=useContext(AuthContext);
 
     const handleRegister = e => {
         e.preventDefault();
-        // const email =e.target.email.value;
-        // const password= e.target.password.value;
-        // console.log(email,password);
         console.log(e.currentTarget);
         const form = new FormData(e.currentTarget);
-        console.log(form);
-        console.log(form.get('password'));
+        const email =form.get('email');
+        const name =form.get('name');
+        const password =form.get('password');
+        const photo =form.get('photo');
+        console.log(email,password,name,photo);
+        // create user
+        createUser(email,password)
+        .then(result=>{
+            console.log(result.user);
+        })
+        .catch(error=>{
+            console.log(error.message);
+        })
     }
 
     return (
