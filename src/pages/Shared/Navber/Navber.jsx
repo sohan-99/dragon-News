@@ -1,12 +1,13 @@
 // import React from 'react';
 import user from '../../../assets/user.png'
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const Navber = () => {
     const links = <>
         <li><NavLink to='/'>Home</NavLink></li>
         <li><NavLink to='/about'>About</NavLink></li>
         <li><NavLink to='/career'>Career</NavLink></li>
+        <li><NavLink to='/login'>Login</NavLink></li>
 
     </>
     return (
@@ -33,7 +34,9 @@ const Navber = () => {
                         <img src={user} />
                     </div>
                 </label>
+                <Link>
                 <button className="btn">Login</button>
+                </Link>
 
             </div>
         </div>
