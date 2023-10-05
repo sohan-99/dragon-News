@@ -6,6 +6,8 @@ import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import News from "../pages/News/News";
 import PrivetRoute from "./PrivetRoute";
+import About from "../pages/About/About";
+import Career from "../pages/Career/Career";
 
 
 
@@ -31,6 +33,14 @@ const router = createBrowserRouter([
             {
                 path: '/register',
                 element: <Register></Register>
+            },
+            {
+                path: '/about',
+                element:<About></About>
+            },
+            {
+                path:'/career',
+                element:<Career></Career>
             }
         ]
 
