@@ -1,29 +1,40 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react/no-unescaped-entities */
 // import React from 'react';
 
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Navber from "../Shared/Navber/Navber";
 import { useContext } from "react";
 import { AuthContext } from "../../provider/AuthProvider";
 
+
 const Login = () => {
-    const { signIn } = useContext(AuthContext)
+    const { user,signIn } = useContext(AuthContext)
+
+    const navigate = useNavigate();
+    const location =useLocation()
+    console.log(location);
+    // const from = location.state?.from?.pathname || "/"
+    // console.log(from);
     const handleLogin = e => {
         e.preventDefault();
         const form = new FormData(e.currentTarget);
         const email = form.get('email');
         const password = form.get('password');
-        
+       
         // Pass email and password to signIn function
         signIn(email, password)
             .then(result => {
                 console.log(result.user);
+                navigate(location?.state? location.state : '/')
+              
             })
             .catch(error => {
                 console.log(error.message);
             })
     }
-    
+   
     return (
         <div>
             <Navber></Navber>
